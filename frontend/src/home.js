@@ -147,7 +147,7 @@ export const ImageUpload = () => {
     formData.append("file", selectedFile);
 
     try {
-      const res = await axios.post("http://localhost:8080/predict", formData);
+      const res = await axios.post("https://potato-disease-classification-6awo.onrender.com/predict", formData);
       console.log("API Response:", res.data);
 
       if (res.status === 200) {
