@@ -5,6 +5,9 @@ from io import BytesIO
 from PIL import Image
 import tensorflow as tf
 from starlette.middleware.cors import CORSMiddleware
+import os
+
+
 
 app = FastAPI()
 
@@ -20,7 +23,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"]
 )
-MODEL = tf.keras.models.load_model("../models/potato-diseas-detection-model.keras")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, "..", "models", "potato-diseas-detection-model.keras")
+
+MODEL = tf.keras.models.load_model(MODEL_PATH)
+
 CLASS_NAMES = ["Early Blight", "Late Blight", "Healthy"]
 
 @app.get("/ping")
